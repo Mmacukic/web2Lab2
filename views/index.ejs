@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vulnerable App</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <h1>Vulnerable Web Application</h1>
+
+  <!-- Form to add a comment -->
+  <form action="/add-comment" method="POST">
+    <label for="comment">Add Comment:</label>
+    <textarea name="comment" id="comment" rows="3" required></textarea>
+    <button type="submit">Submit</button>
+  </form>
+
+  <h2>Comments:</h2>
+  <ul>
+    <% comments.forEach(comment => { %>
+      <li><%- comment %></li>
+    <% }); %>
+  </ul>
+
+  <!-- Toggle XSS Protection -->
+  <form action="/toggle-xss" method="POST">
+    <label>
+      <input type="checkbox" name="xssProtection" <%= xssProtectionEnabled ? "checked" : "" %>>
+      XSS Protection
+    </label>
+    <button type="submit">Toggle XSS Protection</button>
+  </form>
+
+  <!-- Toggle Access Control -->
+  <form action="/toggle-access-control" method="POST">
+    <label>
+      <input type="checkbox" name="accessControl" <%= accessControlEnabled ? "checked" : "" %>>
+      Access Control
+    </label>
+    <button type="submit">Toggle Access Control</button>
+  </form>
+
+  <hr>
+
+  <h2>Admin Access</h2>
+  <p><a href="/admin?user=guest">Access as Guest</a> | <a href="/admin?user=admin">Access as Admin</a></p>
+</body>
+</html>
