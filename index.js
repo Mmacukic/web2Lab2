@@ -35,6 +35,11 @@ app.post('/add-comment', (req, res) => {
   comments.push(comment);
   res.redirect('/');
 });
+app.post('/remove-comments', (req, res) => {
+  
+  comments = [];
+  res.redirect('/');
+});
 
 // Admin route with access control vulnerability
 app.get('/admin', accessControlMiddleware, (req, res) => {
